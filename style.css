@@ -5,15 +5,19 @@
 body {
     font-family: 'Trebuchet MS', sans-serif;
     margin: 0 auto;
-    background-image: url("imgs/black-bg.jpg");
+    background-image: url("imgs/retro-bg.jpg");
     background-size: cover;
 }
 
 h1 {
-    color: #EFEFEF;
+    color: lightpink;
+    background: rgb(31, 22, 53);
     font-size: 3rem;
     width: calc(var(--gridWidth)/1.25);
-    margin: 20px auto;
+    margin: 0 auto;
+    padding: 0 10px;
+    padding-top: 30px;
+    padding-bottom: 10px;
 }
 
 button {
@@ -31,12 +35,22 @@ button {
     width: var(--gridWidth);
     height: var(--gridWidth);
     background-size: 100%;
-    background-image: url("imgs/gray-bg1.jpg");
+    background-image: url("imgs/yellow-bg.jpg");
     background-size: cover;
+    background-position: center;
 }
 
 .square {
     width: calc(var(--gridWidth)/16);
     height: calc(var(--gridWidth)/16);
     background: green;
+}
+
+@media (max-width: 550px) {
+    h1 {
+        font-size: 2.5rem;
+        width: 100%;
+        padding: 0.25em 0;
+        margin-top: 0.25em;
+    }
 }

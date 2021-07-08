@@ -23,7 +23,7 @@ function setGridSize(gridSize){
         root.style.setProperty("--gridWidth", "256px");
     }
     // Border added to stop a line appearing across screen at START
-    grid.style.setProperty("border", "2px gray solid");
+    grid.style.setProperty("border", "2px #525252 solid");
 }
 
 function constructGrid(){
