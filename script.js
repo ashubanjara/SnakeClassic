@@ -4,7 +4,7 @@ const root = document.documentElement;
 
 
 let snake = {
-    currentPos: [2, 1, 0],
+    currentPos: [],
     direction: 1 // Can be w - up, s - down, a - left or d - right
 }
 
@@ -42,12 +42,19 @@ function constructGrid(){
     }
 }
 
+// Initialize snake and draw it on board
 function drawSnake(){
+    // Pick initial position of snake
+    snake.currentPos = [2, 1, 0];
+
+    // Add the snake class to the corresponding grids
     for (let i = 0; i < snake.currentPos.length; i++){
         grid.gridSquares[i].classList.add("snake");
     }
 }
 
+
+// Move the snake 1 unit in its current direction
 function moveSnake(){
     // Remove the last element of the snake
     const tail = snake.currentPos.pop();
@@ -58,7 +65,22 @@ function moveSnake(){
     grid.gridSquares[snake.currentPos[0]].classList.add("snake");
 }
 
+
+// Add event listener/function to control the snake
+document.addEventListener('keydown', function(event){
+    if (event.code === "KeyW" || event.code === "ArrowUp") {
+        console.log('up pressed')
+    } else if (event.code === "KeyS" || event.code === "ArrowDown") {
+        console.log('down pressed')
+    } else if (event.code === "KeyA" || event.code === "ArrowLeft") {
+        console.log('left pressed')
+    } else if (event.code === "KeyD" || event.code === "ArrowRight") {
+        console.log('right pressed')
+    }
+})
+
 setGridSize();
 constructGrid();
 drawSnake();
-moveSnake();
+
+const timerId = setInterval(moveSnake, 400);
