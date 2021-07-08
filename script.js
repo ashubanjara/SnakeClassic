@@ -4,8 +4,8 @@ const root = document.documentElement;
 
 
 let snake = {
-    currentPos: [0,1,2],
-    direction: "w" // Can be w - up, s - down, a - left or d - right
+    currentPos: [2, 1, 0],
+    direction: 1 // Can be w - up, s - down, a - left or d - right
 }
 
 let grid = {
@@ -48,6 +48,17 @@ function drawSnake(){
     }
 }
 
+function moveSnake(){
+    // Remove the last element of the snake
+    const tail = snake.currentPos.pop();
+    grid.gridSquares[tail].classList.remove("snake");
+
+    // Add it to the front of the Snake
+    snake.currentPos.unshift(snake.currentPos[0] + snake.direction)
+    grid.gridSquares[snake.currentPos[0]].classList.add("snake");
+}
+
 setGridSize();
 constructGrid();
 drawSnake();
+moveSnake();
