@@ -28,6 +28,11 @@
     border-radius: 40%;
 }
 
+.apple {
+    background: crimson;
+    border-radius: 50%;
+}
+
 
 /* STYLING */
 body {
