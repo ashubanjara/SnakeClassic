@@ -68,7 +68,7 @@ button {
     margin-bottom: 2.16em;
 }
 
-h1 + span {
+.movement-demo {
     color: lightpink;
     background: rgb(31, 22, 53);
     display: block;
