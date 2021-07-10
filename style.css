@@ -65,11 +65,29 @@ p {
 }
 
 button {
+    margin-bottom: 2.16em;
+}
+
+h1 + span {
+    color: lightpink;
+    background: rgb(31, 22, 53);
+    display: block;
+    margin-bottom: 1em;
 }
 
 .container {
     margin: 0 auto;
     text-align: center;
+}
+
+.purple-bg {
+    background: rgb(31, 22, 53);
+    max-width: 50%;
+    margin: 0 auto;
+}
+
+#score {
+    display: none;
 }
 
 @media (max-width: 550px) {

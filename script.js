@@ -19,7 +19,8 @@ let snake = {
 let grid = {
     gridSquares: [],
     gridEl: document.getElementById("grid"),
-    width: 16
+    width: 16,
+    applePos: -1
 };
 
 
@@ -56,7 +57,7 @@ function constructGrid(){
 // Initialize snake and draw it on board
 function drawSnake(){
     // Pick initial position of snake
-    snake.currentPos = [2, 1, 0];
+    snake.currentPos = [2,1,0];
 
     // Add the snake class to the corresponding grids
     for (let i = 0; i < snake.currentPos.length; i++){
