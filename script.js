@@ -4,6 +4,7 @@
 
 const root = document.documentElement;
 const startBtn = document.getElementById("start-btn");
+const scoreEl = document.getElementById("score-el");
 let timerId = 0;
 
 
@@ -11,14 +12,15 @@ let timerId = 0;
 
 let snake = {
     currentPos: [],
-    direction: 1 // Can be w - up, s - down, a - left or d - right
-}
+    direction: 1, // Can be w - up, s - down, a - left or d - right
+    score: 0
+};
 
 let grid = {
     gridSquares: [],
     gridEl: document.getElementById("grid"),
     width: 16
-}
+};
 
 
 // == FUNCTIONS ==
@@ -63,8 +65,10 @@ function drawSnake(){
 }
 
 // Check for collisions with the wall or itself (game over condition)
-// returns 1 if collision has been detected, otherwise returns 0
-function checkCollision(timerId){
+// returns 1 if collision with wall/itself has been detected
+// returns 2 if collision with apple detected
+// otherwise returns 0
+function checkCollision(){
     let w = grid.width;
     let d = snake.direction;
     if ((snake.currentPos[0] + w >= w*w && d === w) ||
@@ -83,8 +87,12 @@ function checkCollision(timerId){
 // Move the snake 1 unit in its current direction
 // Stop snake movement if collision is detected
 function iterateGame(){
-    if (checkCollision()){
+    let collisionId = checkCollision();
+    if (collisionId === 1){
         return clearInterval(timerId);
+    }
+    else if (collisionId === 2){
+
     }
     //drawApple();
     // Remove the last element of the snake
