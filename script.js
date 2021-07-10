@@ -1,9 +1,13 @@
 // JS For Snake Game
 
+// == DOM ===
+
 const root = document.documentElement;
 const startBtn = document.getElementById("start-btn");
 let timerId = 0;
 
+
+// == OBJECTS ==
 
 let snake = {
     currentPos: [],
@@ -15,6 +19,9 @@ let grid = {
     gridEl: document.getElementById("grid"),
     width: 16
 }
+
+
+// == FUNCTIONS ==
 
 // Set the grid size based on screen size, supports displays down to 256px wide
 function setGridSize(){
@@ -88,6 +95,8 @@ function checkCollision(timerId){
     return 0;
 }
 
+
+// == EVENT LISTENERS ==
 
 // Add event listener/function to control the snake
 document.addEventListener('keydown', function(event){
