@@ -2,6 +2,7 @@
 
 const root = document.documentElement;
 const startBtn = document.getElementById("start-btn");
+let timerId = 0;
 
 
 let snake = {
@@ -56,7 +57,11 @@ function drawSnake(){
 
 
 // Move the snake 1 unit in its current direction
+// Stop snake movement if collision is detected
 function moveSnake(){
+    if (checkCollision()){
+        return clearInterval(timerId);
+    }
     // Remove the last element of the snake
     const tail = snake.currentPos.pop();
     grid.gridSquares[tail].classList.remove("snake");
@@ -64,6 +69,23 @@ function moveSnake(){
     // Add it to the front of the Snake
     snake.currentPos.unshift(snake.currentPos[0] + snake.direction)
     grid.gridSquares[snake.currentPos[0]].classList.add("snake");
+}
+
+
+// Check for collisions with the wall or itself (game over condition)
+// returns 1 if collision has been detected, otherwise returns 0
+function checkCollision(timerId){
+    let w = grid.width;
+    let d = snake.direction;
+    if ((snake.currentPos[0] + w >= w*w && d === w) ||
+        (snake.currentPos[0] % w === w-1 && d === 1) ||
+        (snake.currentPos[0] % w === 0 && d === -1) ||
+        (snake.currentPos[0] - w < 0 && d === -w) ||
+        grid.gridSquares[snake.currentPos[0] +
+        d].classList.contains('snake')){
+            return 1;
+        }
+    return 0;
 }
 
 
@@ -82,7 +104,7 @@ document.addEventListener('keydown', function(event){
 
 // Start button
 startBtn.addEventListener('click', function(){
-    const timerId = setInterval(moveSnake, 100);
+    timerId = setInterval(moveSnake, 100);
 })
 
 setGridSize();
