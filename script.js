@@ -1,6 +1,7 @@
 // JS For Snake Game
 
 const root = document.documentElement;
+const startBtn = document.getElementById("start-btn");
 
 
 let snake = {
@@ -69,18 +70,21 @@ function moveSnake(){
 // Add event listener/function to control the snake
 document.addEventListener('keydown', function(event){
     if (event.code === "KeyW" || event.code === "ArrowUp") {
-        console.log('up pressed')
+        snake.direction = -grid.width;
     } else if (event.code === "KeyS" || event.code === "ArrowDown") {
-        console.log('down pressed')
+        snake.direction = grid.width;
     } else if (event.code === "KeyA" || event.code === "ArrowLeft") {
-        console.log('left pressed')
+        snake.direction = -1;
     } else if (event.code === "KeyD" || event.code === "ArrowRight") {
-        console.log('right pressed')
+        snake.direction = 1;
     }
+})
+
+// Start button
+startBtn.addEventListener('click', function(){
+    const timerId = setInterval(moveSnake, 100);
 })
 
 setGridSize();
 constructGrid();
 drawSnake();
-
-const timerId = setInterval(moveSnake, 400);
