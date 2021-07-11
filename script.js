@@ -143,7 +143,7 @@ document.addEventListener('keydown', function(event){
 
 // Start button
 startBtn.addEventListener('click', function(){
-    timerId = setInterval(iterateGame, 100);
+    timerId = setInterval(iterateGame, 200);
 })
 
 setGridSize();
