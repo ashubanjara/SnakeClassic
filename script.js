@@ -102,6 +102,7 @@ function iterateGame(){
     }
     else if (collisionId === 2){
         grid.gridSquares[grid.applePos].classList.remove("apple");
+        // Reset apple position
         grid.applePos = -1;
         snake.score += 1;
         scoreEl.textContent = snake.score;
@@ -112,6 +113,12 @@ function iterateGame(){
     // Remove the last element of the snake
     const tail = snake.currentPos.pop();
     grid.gridSquares[tail].classList.remove("snake");
+
+    // Grow snake while moving to always ensure tail is valid only if apple
+    // collision is detected
+    if (collisionId === 2){
+        growSnake(tail);
+    }
 
     // Add it to the front of the Snake
     snake.currentPos.unshift(snake.currentPos[0] + snake.direction)
@@ -133,6 +140,11 @@ function generateApple(){
 function drawApple(){
     let appleIndex = generateApple();
     grid.gridSquares[appleIndex].classList.add("apple");
+}
+
+function growSnake(tail){
+    snake.currentPos.push(tail);
+    grid.gridSquares[tail].classList.add("snake");
 }
 
 
