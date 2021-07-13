@@ -95,7 +95,9 @@ function iterateGame(){
     else if (collisionId === 2){
 
     }
-    //drawApple();
+    if (grid.applePos < 0){
+        drawApple();
+    }
     // Remove the last element of the snake
     const tail = snake.currentPos.pop();
     grid.gridSquares[tail].classList.remove("snake");
@@ -112,6 +114,7 @@ function generateApple(){
     while(snake.currentPos.includes(randNum)){
         randNum = Math.floor(Math.random()*(grid.width*grid.width));
     }
+    grid.applePos = randNum;
     return randNum;
 }
 

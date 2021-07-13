@@ -51,6 +51,12 @@ h1 {
     padding: 0 0.3em;
     padding-top: 0.5em;
     padding-bottom: 0.33em;
+    transition: transform 250ms;
+}
+
+h1:hover,
+h1:active {
+    transform: scale(1.1);
 }
 
 p {
@@ -72,7 +78,7 @@ button {
 }
 
 .purple-bg {
-    background: rgb(31, 22, 53, 0.75);
+    background: rgba(31, 22, 53, 0.5);
     width: var(--gridWidth);
     margin: 0 auto;
     border-radius: 20%;
