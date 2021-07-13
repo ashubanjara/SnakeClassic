@@ -16,11 +16,15 @@
       <div class="container">
           <div class="purple-bg">
               <h1>Snake Classic</h1>
-              <p id="score">Score: <span id="score-el">0</span></p>
-              <button type="button" id="start-btn">START GAME</button>
+              <div class="flex-container">
+                  <p id="score">Score<br><span id="score-el">0</span></p>
+                  <p id="high-score">High-Score<br><span id="h-score-el">0</span>
+                  </p>
+              </div>
           </div>
 
           <div class="grid" id="grid"></div>
+        <button type="button" id="start-btn">START GAME</button>
       </div>
       <script src="script.js"></script>
   </body>
