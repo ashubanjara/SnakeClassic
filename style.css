@@ -23,7 +23,7 @@
 }
 
 .snake {
-    background: lightgreen;
+    background: lightgreen !important;
     /*border: 1px black solid;*/
     border-radius: 40%;
 }

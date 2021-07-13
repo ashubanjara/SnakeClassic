@@ -72,6 +72,8 @@ function drawSnake(){
 function checkCollision(){
     let w = grid.width;
     let d = snake.direction;
+
+    // If collision with wall
     if ((snake.currentPos[0] + w >= w*w && d === w) ||
         (snake.currentPos[0] % w === w-1 && d === 1) ||
         (snake.currentPos[0] % w === 0 && d === -1) ||
@@ -80,6 +82,12 @@ function checkCollision(){
         d].classList.contains('snake')){
             return 1;
         }
+
+    // If collision with Apple return 2
+    else if (snake.currentPos[0] === grid.applePos){
+        return 2;
+    }
+
     return 0;
 }
 
@@ -93,7 +101,10 @@ function iterateGame(){
         return clearInterval(timerId);
     }
     else if (collisionId === 2){
-
+        grid.gridSquares[grid.applePos].classList.remove("apple");
+        grid.applePos = -1;
+        snake.score += 1;
+        scoreEl.textContent = snake.score;
     }
     if (grid.applePos < 0){
         drawApple();
