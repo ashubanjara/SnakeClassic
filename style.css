@@ -86,7 +86,7 @@ button:hover {
 }
 
 button:active {
-    transform: scale(1);
+    transform: scale(0.8);
 }
 
 span {
@@ -112,7 +112,21 @@ span {
     justify-content: space-between;
 }
 
-#score {
+#game-over-modal {
+    display: none;
+    font-weight: bold;
+    position: absolute;
+    top: 35%;
+    left: 0;
+    right: 0;
+    width: var(--gridWidth);
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background: rgb(0, 0, 0, 0.5);
+    padding: calc(var(--gridWidth)/4) 0px;
+    border-radius: 20px;
+    animation: fade 0.5s;
 }
 
 @media (max-width: 550px) {
