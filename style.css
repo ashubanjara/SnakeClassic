@@ -101,8 +101,8 @@ span {
 }
 
 .purple-bg {
-    background: rgba(31, 22, 53, 0.5);
-    width: calc(var(--gridWidth)*1.25);
+    background: linear-gradient(rgba(31, 22, 53, 0.5), rgba(31, 22, 53, 0));
+    max-width: calc(var(--gridWidth)*1.33);
     margin: 0 auto;
     border-radius: 20%;
 }

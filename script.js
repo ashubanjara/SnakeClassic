@@ -5,6 +5,7 @@
 const root = document.documentElement;
 const startBtn = document.getElementById("start-btn");
 const scoreEl = document.getElementById("score-el");
+const highScoreEl = document.getElementById("h-score-el");
 let timerId = 0;
 
 
@@ -13,7 +14,8 @@ let timerId = 0;
 let snake = {
     currentPos: [],
     direction: 1, // Can be w - up, s - down, a - left or d - right
-    score: 0
+    score: 0,
+    highScore: 0
 };
 
 let grid = {
@@ -91,6 +93,29 @@ function checkCollision(){
     return 0;
 }
 
+// Generate an apple in a random position not held by the snake and return
+// its position
+function generateApple(){
+    let randNum = snake.currentPos[0];
+    while(snake.currentPos.includes(randNum)){
+        randNum = Math.floor(Math.random()*(grid.width*grid.width));
+    }
+    grid.applePos = randNum;
+    return randNum;
+}
+
+// Call generate apple, then draw the apple on the board
+function drawApple(){
+    let appleIndex = generateApple();
+    grid.gridSquares[appleIndex].classList.add("apple");
+}
+
+function growSnake(tail){
+    snake.currentPos.push(tail);
+    grid.gridSquares[tail].classList.add("snake");
+}
+
+
 // Calculate next iteration of game
 // Generate and Draw Apple at the start
 // Move the snake 1 unit in its current direction
@@ -98,6 +123,11 @@ function checkCollision(){
 function iterateGame(){
     let collisionId = checkCollision();
     if (collisionId === 1){
+        // Set high score if highest score
+        if (snake.score > snake.highScore){
+            snake.highScore = snake.score;
+            highScoreEl.textContent = snake.highScore;
+        }
         return clearInterval(timerId);
     }
     else if (collisionId === 2){
@@ -124,29 +154,6 @@ function iterateGame(){
     snake.currentPos.unshift(snake.currentPos[0] + snake.direction)
     grid.gridSquares[snake.currentPos[0]].classList.add("snake");
 }
-
-// Generate an apple in a random position not held by the snake and return
-// its position
-function generateApple(){
-    let randNum = snake.currentPos[0];
-    while(snake.currentPos.includes(randNum)){
-        randNum = Math.floor(Math.random()*(grid.width*grid.width));
-    }
-    grid.applePos = randNum;
-    return randNum;
-}
-
-// Call generate apple, then draw the apple on the board
-function drawApple(){
-    let appleIndex = generateApple();
-    grid.gridSquares[appleIndex].classList.add("apple");
-}
-
-function growSnake(tail){
-    snake.currentPos.push(tail);
-    grid.gridSquares[tail].classList.add("snake");
-}
-
 
 // == EVENT LISTENERS ==
 
