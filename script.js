@@ -3,9 +3,14 @@
 // == DOM ===
 
 const root = document.documentElement;
-const startBtn = document.getElementById("start-btn");
 const scoreEl = document.getElementById("score-el");
 const highScoreEl = document.getElementById("h-score-el");
+const finalScoreEl = document.getElementById("final-score-el");
+const startBtn = document.getElementById("start-btn");
+const restartBtn = document.getElementById("restart-btn");
+const menuBtn = document.getElementById("menu-btn");
+const newGameModal = document.getElementById("new-game-modal");
+const gameOverModal = document.getElementById("game-over-modal");
 let timerId = 0;
 
 
@@ -128,6 +133,7 @@ function iterateGame(){
             snake.highScore = snake.score;
             highScoreEl.textContent = snake.highScore;
         }
+        gameOverModal.style.setProperty("display", "block");
         return clearInterval(timerId);
     }
     else if (collisionId === 2){
@@ -136,6 +142,7 @@ function iterateGame(){
         grid.applePos = -1;
         snake.score += 1;
         scoreEl.textContent = snake.score;
+        finalScoreEl.textContent = snake.score;
     }
     if (grid.applePos < 0){
         drawApple();
@@ -155,10 +162,21 @@ function iterateGame(){
     grid.gridSquares[snake.currentPos[0]].classList.add("snake");
 }
 
+// Reset the game back to it's initial state
+function resetGame(){
+    for (let item of snake.currentPos){
+        grid.gridSquares[item].classList.remove("snake");
+    }
+    snake.currentPos = [];
+    snake.direction = 1;
+    snake.score = 0;
+    scoreEl.textContent = 0;
+}
+
 // == EVENT LISTENERS ==
 
 // Add event listener/function to control the snake
-document.addEventListener('keydown', function(event){
+document.addEventListener("keydown", function(event){
     if ((event.code === "KeyW" || event.code === "ArrowUp") &&
     (snake.direction != grid.width)) {
         snake.direction = -grid.width;
@@ -175,8 +193,25 @@ document.addEventListener('keydown', function(event){
 })
 
 // Start button
-startBtn.addEventListener('click', function(){
+startBtn.addEventListener("click", function(){
     timerId = setInterval(iterateGame, 200);
+    newGameModal.style.setProperty("display", "none");
+})
+
+// Restart button
+restartBtn.addEventListener("click", function(){
+    resetGame();
+    drawSnake();
+    gameOverModal.style.setProperty("display", "none");
+    timerId = setInterval(iterateGame, 200);
+})
+
+// Main Menu button
+menuBtn.addEventListener("click", function(){
+    resetGame();
+    gameOverModal.style.setProperty("display", "none");
+    drawSnake();
+    newGameModal.style.setProperty("display", "block");
 })
 
 setGridSize();

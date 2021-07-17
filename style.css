@@ -48,7 +48,7 @@ h1 {
     font-size: 2.25rem;
     margin: 0 auto;
     padding-top: 0.5em;
-    padding-bottom: 0.33em;
+    padding-bottom: 1em;
     transition: transform 250ms;
 }
 
@@ -61,8 +61,7 @@ p {
     color: rgb(250, 125, 193);
     color: white;
     margin: 0 auto;
-    padding-top: 1em;
-    padding-bottom: 1.2em;
+    padding-bottom: 2.2em;
     font-size: 1rem;
 }
 
@@ -71,7 +70,6 @@ button {
     border: none;
     border-radius: 5px;
     padding: 0.15em 1em;
-    transition: transform 250ms;
     cursor: pointer;
     background: rgb(250, 125, 193);
     color: #F2F2F2;
@@ -79,6 +77,8 @@ button {
     letter-spacing: 1.5px;
     font-size: 1rem;
     top: 50%;
+    border: 0.5px solid pink;
+    transition: transform 250ms, opacity 250ms, visibility 300ms;
 }
 
 button:hover {
@@ -86,7 +86,7 @@ button:hover {
 }
 
 button:active {
-    transform: scale(0.8);
+    transform: scale(1);
 }
 
 span {
@@ -112,11 +112,24 @@ span {
     justify-content: space-between;
 }
 
-#game-over-modal {
-    display: none;
+.fade-out-btn {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.fade-out-modal {
+    opacity: 0;
+}
+
+.fade-in {
+    opacity:
+}
+
+#new-game-modal {
     font-weight: bold;
     position: absolute;
-    top: 35%;
+    top: calc(var(--gridWidth)/2.35);
     left: 0;
     right: 0;
     width: var(--gridWidth);
@@ -124,9 +137,26 @@ span {
     margin-right: auto;
     text-align: center;
     background: rgb(0, 0, 0, 0.5);
-    padding: calc(var(--gridWidth)/4) 0px;
+    padding: 8vh 0;
     border-radius: 20px;
-    animation: fade 0.5s;
+    animation: fade 1s;
+}
+
+#game-over-modal {
+    display: none;
+    font-weight: bold;
+    position: absolute;
+    top: calc(var(--gridWidth)/2);
+    left: 0;
+    right: 0;
+    width: var(--gridWidth);
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background: rgb(0, 0, 0, 0.5);
+    padding: 11vh 0;
+    border-radius: 20px;
+    animation: fade 1s;
 }
 
 @media (max-width: 550px) {
@@ -139,5 +169,17 @@ span {
 
     #score {
         display: none;
+    }
+}
+
+
+/* Animations */
+
+@keyframes fade {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
     }
 }

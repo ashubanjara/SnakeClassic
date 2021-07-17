@@ -21,7 +21,6 @@
                   <p id="high-score">High-Score<br><span id="h-score-el">0</span>
                   </p>
               </div>
-              <button type="button" id="start-btn">START GAME</button>
           </div>
 
           <div class="grid" id="grid"></div>
@@ -29,7 +28,19 @@
 
       <div id="game-over-modal">
           <p>GAME OVER</p>
-          <p>Your Score: <span id="score-el">0</span></p>
+          <p>Your Score: <span id="final-score-el">0</span></p>
+          <button id="restart-btn">PLAY AGAIN!</button>
+          <br>
+          <button id="menu-btn">MAIN MENU</button>
+      </div>
+
+      <div id="new-game-modal">
+          <p>Controls: (mobile WIP)</p>
+          <p>W/S/A/D - Movement</p>
+          <p>Arrow Keys - Movement</p>
+          <p>Instructions:</p>
+          <p>Eat Apple, Get Score</p>
+          <button id="start-btn">START GAME</button>
       </div>
       <script src="script.js"></script>
   </body>
