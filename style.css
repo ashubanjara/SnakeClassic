@@ -173,11 +173,11 @@ span {
     }
 
     h1 {
-        padding-top: 1.85em;
+        padding-top: 1.25em;
     }
 
     .flex-container p {
-        margin-top: 3em;
+        margin-top: 2.5em;
     }
 
     .grid {
@@ -185,8 +185,13 @@ span {
     }
 
     #new-game-modal {
-        top: 222px;
+        top: 195px;
         padding: 2.5vh 0;
+    }
+
+    #game-over-modal {
+        top: 210px;
+        padding: 8vh 0;
     }
 }
 
