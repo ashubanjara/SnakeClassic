@@ -173,24 +173,24 @@ span {
     }
 
     h1 {
-        padding-top: 0.85em;
+        padding-top: 1.25em;
     }
 
     .flex-container p {
-        margin-top: 1.15em;
+        margin-top: 2em;
     }
 
     .grid {
-        margin-top: 0.75em;
+        margin-top: 1.25em;
     }
 
     #new-game-modal {
-        top: 170px;
+        top: 195px;
         padding: 2.5vh 0;
     }
 
     #game-over-modal {
-        top: 175px;
+        top: 210px;
         padding: 8vh 0;
     }
 }
