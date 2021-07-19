@@ -13,6 +13,7 @@ const menuBtn = document.getElementById("menu-btn");
 const newGameModal = document.getElementById("new-game-modal");
 const gameOverModal = document.getElementById("game-over-modal");
 let timerId = 0;
+let snakeSpeed = 100;
 
 
 // == OBJECTS ==
@@ -208,7 +209,8 @@ document.addEventListener("keydown", function(event){
 
 // Listen for swipe (for mobile controls) using hammer.js
 let swipeListener = new Hammer(gridEl);
-swipeListener.get('pan').set({ direction: Hammer.DIRECTION_ALL });
+swipeListener.get('pan').set({direction: Hammer.DIRECTION_ALL});
+swipeListener.get('pan').set({threshold: 75});
 
 swipeListener.on("panup", function(){
     if (snake.direction != grid.width){
@@ -233,7 +235,7 @@ swipeListener.on("panright", function(){
 
 // Start button
 startBtn.addEventListener("click", function(){
-    timerId = setInterval(iterateGame, 200);
+    timerId = setInterval(iterateGame, snakeSpeed);
     newGameModal.style.setProperty("display", "none");
 })
 
@@ -242,7 +244,7 @@ restartBtn.addEventListener("click", function(){
     resetGame();
     drawSnake();
     gameOverModal.style.setProperty("display", "none");
-    timerId = setInterval(iterateGame, 200);
+    timerId = setInterval(iterateGame, snakeSpeed);
 })
 
 // Main Menu button
