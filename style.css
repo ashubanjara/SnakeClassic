@@ -176,8 +176,13 @@ span {
         padding-top: 1.25em;
     }
 
+    button {
+        font-size: 1.2rem;
+    }
+
     .flex-container p {
         margin-top: 2em;
+        font-size: 1.2rem;
     }
 
     .grid {
@@ -185,13 +190,14 @@ span {
     }
 
     #new-game-modal {
-        top: 195px;
+        top: 207px;
         padding: 2.5vh 0;
     }
 
     #game-over-modal {
-        top: 210px;
+        top: 220px;
         padding: 8vh 0;
+        font-size: 1.15rem;
     }
 }
 
