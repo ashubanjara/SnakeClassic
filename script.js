@@ -30,6 +30,12 @@ let grid = {
     applePos: -1
 };
 
+// Retrieve high score from local storage
+if (localStorage.getItem("highScore")){
+      snake.highScore = localStorage.getItem("highScore");
+      highScoreEl.textContent = snake.highScore;
+}
+
 
 // == FUNCTIONS ==
 
@@ -80,7 +86,7 @@ function checkCollision(){
     let w = grid.width;
     let d = snake.direction;
 
-    // If collision with wall
+    // If collision with wall or itself
     if ((snake.currentPos[0] + w >= w*w && d === w) ||
         (snake.currentPos[0] % w === w-1 && d === 1) ||
         (snake.currentPos[0] % w === 0 && d === -1) ||
@@ -128,10 +134,11 @@ function growSnake(tail){
 function iterateGame(){
     let collisionId = checkCollision();
     if (collisionId === 1){
-        // Set high score if highest score
+        // Set high score if highest score and save it to local storage
         if (snake.score > snake.highScore){
             snake.highScore = snake.score;
             highScoreEl.textContent = snake.highScore;
+            saveHighScore();
         }
         gameOverModal.style.setProperty("display", "block");
         return clearInterval(timerId);
@@ -172,6 +179,12 @@ function resetGame(){
     snake.score = 0;
     scoreEl.textContent = 0;
 }
+
+// Save the current high score to local storage
+function saveHighScore(){
+  localStorage.setItem("highScore", snake.highScore);
+}
+
 
 // == EVENT LISTENERS ==
 
