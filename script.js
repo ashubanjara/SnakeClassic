@@ -6,6 +6,7 @@ const root = document.documentElement;
 const scoreEl = document.getElementById("score-el");
 const highScoreEl = document.getElementById("h-score-el");
 const finalScoreEl = document.getElementById("final-score-el");
+const gridEl = document.getElementById("grid");
 const startBtn = document.getElementById("start-btn");
 const restartBtn = document.getElementById("restart-btn");
 const menuBtn = document.getElementById("menu-btn");
@@ -70,11 +71,11 @@ function constructGrid(){
 // Initialize snake and draw it on board
 function drawSnake(){
     // Pick initial position of snake
-    snake.currentPos = [2,1,0];
+    snake.currentPos = [116, 115, 114];
 
     // Add the snake class to the corresponding grids
     for (let i = 0; i < snake.currentPos.length; i++){
-        grid.gridSquares[i].classList.add("snake");
+        grid.gridSquares[snake.currentPos[i]].classList.add("snake");
     }
 }
 
@@ -191,19 +192,44 @@ function saveHighScore(){
 // Add event listener/function to control the snake
 document.addEventListener("keydown", function(event){
     if ((event.code === "KeyW" || event.code === "ArrowUp") &&
-    (snake.direction != grid.width)) {
+    (snake.direction != grid.width)){
         snake.direction = -grid.width;
     } else if ((event.code === "KeyS" || event.code === "ArrowDown") &&
-    (snake.direction != -grid.width)) {
+    (snake.direction != -grid.width)){
         snake.direction = grid.width;
     } else if ((event.code === "KeyA" || event.code === "ArrowLeft") &&
-    (snake.direction != 1)) {
+    (snake.direction != 1)){
         snake.direction = -1;
     } else if ((event.code === "KeyD" || event.code === "ArrowRight") &&
-    (snake.direction != -1)) {
+    (snake.direction != -1)){
         snake.direction = 1;
     }
 })
+
+// Listen for swipe (for mobile controls) using hammer.js
+let swipeListener = new Hammer(gridEl);
+swipeListener.get('pan').set({ direction: Hammer.DIRECTION_ALL });
+
+swipeListener.on("panup", function(){
+    if (snake.direction != grid.width){
+        snake.direction = -grid.width;
+    }
+});
+swipeListener.on("pandown", function(){
+    if (snake.direction != -grid.width){
+        snake.direction = grid.width;
+    }
+});
+swipeListener.on("panleft", function(){
+    if (snake.direction != 1){
+        snake.direction = -1;
+    }
+});
+swipeListener.on("panright", function(){
+    if (snake.direction != -1){
+        snake.direction = 1;
+    }
+});
 
 // Start button
 startBtn.addEventListener("click", function(){
