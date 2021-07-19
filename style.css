@@ -29,8 +29,11 @@
 }
 
 .apple {
-    background: crimson;
-    border-radius: 50%;
+    background-image: url("imgs/apple.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform: scale(1.2);
 }
 
 
