@@ -210,7 +210,7 @@ document.addEventListener("keydown", function(event){
 // Listen for swipe (for mobile controls) using hammer.js
 let swipeListener = new Hammer(gridEl);
 swipeListener.get('pan').set({direction: Hammer.DIRECTION_ALL});
-swipeListener.get('pan').set({threshold: 75});
+swipeListener.get('pan').set({threshold: 40});
 
 swipeListener.on("panup", function(){
     if (snake.direction != grid.width){
