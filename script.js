@@ -21,6 +21,9 @@ const gameOverModal = document.getElementById("game-over-modal");
 const difficultyModal = document.getElementById("difficulty-modal");
 let timerId = 0;
 
+const eatAudio = new Audio("audio/snake-eat2.wav");
+const wallHit = new Audio("audio/wall-hit.wav");
+
 
 // == OBJECTS ==
 
@@ -111,11 +114,13 @@ function checkCollision(){
         (snake.currentPos[0] - w < 0 && d === -w) ||
         grid.gridSquares[snake.currentPos[0] +
         d].classList.contains('snake')){
+            wallHit.play();
             return 1;
         }
 
     // If collision with Apple return 2
     else if (snake.currentPos[0] === grid.applePos){
+        eatAudio.play();
         return 2;
     }
 
