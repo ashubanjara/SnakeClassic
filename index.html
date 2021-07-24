@@ -32,7 +32,7 @@
           <p>Your Score: <span id="final-score-el">0</span></p>
           <button id="restart-btn">PLAY AGAIN!</button>
           <br>
-          <button id="menu-btn">MAIN MENU</button>
+          <button id="menu-btn" onclick="mainMenu()">MAIN MENU</button>
       </div>
 
       <div id="new-game-modal">
@@ -41,8 +41,23 @@
           <p>Arrow Keys - Movement</p>
           <p>Swipe (Mobile) - Movement</p>
           <p class="text-accent">Instructions:</p>
-          <p>Eat Apple, Get Big</p>
-          <button id="start-btn">START GAME</button>
+          <p>Consume Apple, Get Big</p>
+          <button id="start-btn" onclick="startGame()">START GAME</button>
+          <button id="difficulty-btn">DIFFICULTY</button>
+      </div>
+
+      <div id="difficulty-modal">
+          <p>Select Your Difficulty:</p>
+          <button id="easy-btn" class="diff-btn">EASY</button>
+          <button id="medium-btn" class="diff-btn">MEDIUM</button>
+          <button id="hard-btn" class="diff-btn">HARD</button>
+          <p class="diff-note">Note: this changes the snake's
+              speed and speed multiplication factor</p>
+          <div class="difficulty-navigation">
+              <button onclick="startGame()">START GAME</button>
+              <br>
+              <button id="main-menu-diff-btn" onclick="mainMenu()">MAIN MENU</button>
+          </div>
       </div>
       <script src="script.js"></script>
   </body>

@@ -7,13 +7,19 @@ const scoreEl = document.getElementById("score-el");
 const highScoreEl = document.getElementById("h-score-el");
 const finalScoreEl = document.getElementById("final-score-el");
 const gridEl = document.getElementById("grid");
+
 const startBtn = document.getElementById("start-btn");
 const restartBtn = document.getElementById("restart-btn");
 const menuBtn = document.getElementById("menu-btn");
+const difficultyBtn = document.getElementById("difficulty-btn");
+const easyBtn = document.getElementById("easy-btn");
+const mediumBtn = document.getElementById("medium-btn");
+const hardBtn = document.getElementById("hard-btn");
+
 const newGameModal = document.getElementById("new-game-modal");
 const gameOverModal = document.getElementById("game-over-modal");
+const difficultyModal = document.getElementById("difficulty-modal");
 let timerId = 0;
-let snakeSpeed = 100;
 
 
 // == OBJECTS ==
@@ -21,8 +27,12 @@ let snakeSpeed = 100;
 let snake = {
     currentPos: [],
     direction: 1, // Can be w - up, s - down, a - left or d - right
+    canMove: true,
     score: 0,
-    highScore: 0
+    highScore: 0,
+    difficulty: "e", // e - easy, m - medium, h - hard
+    snakeSpeed: 300, // Initial speed of snake
+    speedFactor: 0.95 // Snake gets faster by 5%
 };
 
 let grid = {
@@ -30,6 +40,12 @@ let grid = {
     gridEl: document.getElementById("grid"),
     width: 16,
     applePos: -1
+};
+
+let difficulty = {
+    easy: [400, 2],
+    medium: [250, 1],
+    hard: [150, 1]
 };
 
 // Retrieve high score from local storage
@@ -134,6 +150,7 @@ function growSnake(tail){
 // Move the snake 1 unit in its current direction
 // Stop snake movement if collision is detected
 function iterateGame(){
+    snake.canMove = true;
     let collisionId = checkCollision();
     if (collisionId === 1){
         // Set high score if highest score and save it to local storage
@@ -145,8 +162,17 @@ function iterateGame(){
         gameOverModal.style.setProperty("display", "block");
         return clearInterval(timerId);
     }
+    // if collision with apple
     else if (collisionId === 2){
         grid.gridSquares[grid.applePos].classList.remove("apple");
+
+        // Make snake faster to an acceptable threshold
+        if (snake.snakeSpeed > 100){
+            clearInterval(timerId);
+            snake.snakeSpeed -= snake.speedFactor;
+            timerId = setInterval(iterateGame, snake.snakeSpeed);
+        }
+
         // Reset apple position
         grid.applePos = -1;
         snake.score += 1;
@@ -179,6 +205,17 @@ function resetGame(){
     snake.currentPos = [];
     snake.direction = 1;
     snake.score = 0;
+
+    if (snake.difficulty === "e"){
+        snake.snakeSpeed = difficulty.easy[0];
+    }
+    else if (snake.difficulty === "m"){
+        snake.snakeSpeed = difficulty.medium[0];
+    }
+    else if (snake.difficulty === "h"){
+        snake.snakeSpeed = difficulty.hard[0];
+    }
+
     scoreEl.textContent = 0;
 }
 
@@ -187,23 +224,44 @@ function saveHighScore(){
   localStorage.setItem("highScore", snake.highScore);
 }
 
+// Back to Main Menu
+function mainMenu(){
+    resetGame();
+    gameOverModal.style.setProperty("display", "none");
+    difficultyModal.style.setProperty("display", "none");
+    drawSnake();
+    newGameModal.style.setProperty("display", "block");
+}
+
+// Start game
+function startGame(){
+    timerId = setInterval(iterateGame, snake.snakeSpeed);
+    newGameModal.style.setProperty("display", "none");
+    difficultyModal.style.setProperty("display", "none");
+}
 
 // == EVENT LISTENERS ==
 
 // Add event listener/function to control the snake
 document.addEventListener("keydown", function(event){
-    if ((event.code === "KeyW" || event.code === "ArrowUp") &&
-    (snake.direction != grid.width)){
-        snake.direction = -grid.width;
-    } else if ((event.code === "KeyS" || event.code === "ArrowDown") &&
-    (snake.direction != -grid.width)){
-        snake.direction = grid.width;
-    } else if ((event.code === "KeyA" || event.code === "ArrowLeft") &&
-    (snake.direction != 1)){
-        snake.direction = -1;
-    } else if ((event.code === "KeyD" || event.code === "ArrowRight") &&
-    (snake.direction != -1)){
-        snake.direction = 1;
+    if (snake.canMove){
+        if ((event.code === "KeyW" || event.code === "ArrowUp") &&
+        (snake.direction != grid.width)){
+            snake.direction = -grid.width;
+            snake.canMove = false;
+        } else if ((event.code === "KeyS" || event.code === "ArrowDown") &&
+        (snake.direction != -grid.width)){
+            snake.direction = grid.width;
+            snake.canMove = false;
+        } else if ((event.code === "KeyA" || event.code === "ArrowLeft") &&
+        (snake.direction != 1)){
+            snake.direction = -1;
+            snake.canMove = false;
+        } else if ((event.code === "KeyD" || event.code === "ArrowRight") &&
+        (snake.direction != -1)){
+            snake.direction = 1;
+            snake.canMove = false;
+        }
     }
 })
 
@@ -233,18 +291,12 @@ swipeListener.on("panright", function(){
     }
 });
 
-// Start button
-startBtn.addEventListener("click", function(){
-    timerId = setInterval(iterateGame, snakeSpeed);
-    newGameModal.style.setProperty("display", "none");
-})
-
 // Restart button
 restartBtn.addEventListener("click", function(){
     resetGame();
     drawSnake();
     gameOverModal.style.setProperty("display", "none");
-    timerId = setInterval(iterateGame, snakeSpeed);
+    timerId = setInterval(iterateGame, snake.snakeSpeed);
 })
 
 // Main Menu button
@@ -253,6 +305,40 @@ menuBtn.addEventListener("click", function(){
     gameOverModal.style.setProperty("display", "none");
     drawSnake();
     newGameModal.style.setProperty("display", "block");
+})
+
+// Difficulty Navigation button
+difficultyBtn.addEventListener("click", function(){
+    newGameModal.style.setProperty("display", "none");
+    difficultyModal.style.setProperty("display", "block");
+})
+
+// Difficulty Selector buttons
+easyBtn.addEventListener("click", function(){
+    easyBtn.style.setProperty("background", "firebrick");
+    mediumBtn.style.setProperty("background", "rgb(250, 125, 193)")
+    hardBtn.style.setProperty("background", "rgb(250, 125, 193)")
+    snake.difficulty = "e";
+    snake.snakeSpeed = difficulty.easy[0];
+    snake.speedFactor = difficulty.easy[1];
+})
+
+mediumBtn.addEventListener("click", function(){
+    mediumBtn.style.setProperty("background", "firebrick");
+    easyBtn.style.setProperty("background", "rgb(250, 125, 193)")
+    hardBtn.style.setProperty("background", "rgb(250, 125, 193)")
+    snake.difficulty = "m";
+    snake.snakeSpeed = difficulty.medium[0];
+    snake.speedFactor = difficulty.medium[1];
+})
+
+hardBtn.addEventListener("click", function(){
+    hardBtn.style.setProperty("background", "firebrick");
+    easyBtn.style.setProperty("background", "rgb(250, 125, 193)")
+    mediumBtn.style.setProperty("background", "rgb(250, 125, 193)")
+    snake.difficulty = "h";
+    snake.snakeSpeed = difficulty.hard[0];
+    snake.speedFactor = difficulty.hard[1];
 })
 
 setGridSize();

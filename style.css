@@ -69,6 +69,7 @@ p {
 }
 
 button {
+    margin: 0 0.2em;
     margin-bottom: 0.8em;
     border: none;
     border-radius: 5px;
@@ -110,8 +111,22 @@ span {
     border-radius: 20%;
 }
 
+.difficulty-navigation {
+    margin-top: 0.5em;
+}
+
+.diff-note {
+    line-height: 36px;
+    padding-bottom: 0.66em;
+    width: 90%;
+}
+
 .text-accent {
     color: rgb(250, 125, 193);
+}
+
+.diff-btn:focus {
+    background: firebrick;
 }
 
 .flex-container {
@@ -130,7 +145,7 @@ span {
 }
 
 .fade-in {
-    opacity:
+    opacity: 1;
 }
 
 #new-game-modal {
@@ -162,6 +177,23 @@ span {
     text-align: center;
     background: rgb(0, 0, 0, 0.5);
     padding: 11vh 0;
+    border-radius: 20px;
+    animation: fade 1s;
+}
+
+#difficulty-modal {
+    display: none;
+    font-weight: bold;
+    position: absolute;
+    top: calc(var(--gridWidth)/2.40);
+    left: 0;
+    right: 0;
+    width: var(--gridWidth);
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background: rgb(0, 0, 0, 0.5);
+    padding: 9vh 0;
     border-radius: 20px;
     animation: fade 1s;
 }
