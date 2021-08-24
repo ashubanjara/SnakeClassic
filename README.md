@@ -1,4 +1,4 @@
-Classic Snake Made In JS
+<b>Classic Snake Made In JS</b>
 
 Check it out on GitHub Pages: https://ashubanjara.github.io/SnakeClassic/
 
@@ -12,7 +12,7 @@ Check it out on GitHub Pages: https://ashubanjara.github.io/SnakeClassic/
   <li>Game Audio (Experimental)</li>
 </ul>
 
-Tools Used:
+<b>Tools Used:</b>
 
 HTML, CSS, Javascript, HammerJS (for swipe controls)
 
