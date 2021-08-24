@@ -2,7 +2,7 @@ Classic Snake Made In JS
 
 Check it out on GitHub Pages: https://ashubanjara.github.io/SnakeClassic/
 
-Features: 
+<em>Features:</em>
 
 <ul>
   <li>Mobile Support</li>
