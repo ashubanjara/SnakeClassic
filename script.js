@@ -21,7 +21,7 @@ const gameOverModal = document.getElementById("game-over-modal");
 const difficultyModal = document.getElementById("difficulty-modal");
 let timerId = 0;
 
-const eatAudio = new Audio("audio/snake-eat2.wav");
+const eatAudio = new Audio("audio/snake-eat.wav");
 const wallHit = new Audio("audio/wall-hit.wav");
 
 
